@@ -1,0 +1,19 @@
+{
+"app_title" : "Islami",
+"sura_name" : "Sura Name",
+"num_of_verses" : "Num of verses",
+"quran" : "Quran",
+"hadeth" : "Hadeth",
+"sebha" : "Sebha",
+"radio" : "Radio",
+"hadeth_name" : "Hadeth Name",
+"radio_name" : "Holy Quran Radio",
+"num_of_praises" : "Number of praises",
+"praise1" :"Praise God",
+"praise2" :"Thank God",
+"praise3" : "Allah is the greatest",
+"language" : "Language",
+"arabic" : "Arabic",
+"english" : "English",
+"settings" : "Settings"
+}

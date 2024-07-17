@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_app/app_colors.dart';
 import 'package:islami_app/quran/item_sura_name.dart';
 
@@ -237,69 +238,75 @@ class QuranTab extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Expanded(flex: 1, child: Image.asset('assets/images/quran_logo.png')),
-          Divider(
-            color: AppColors.primaryLightColor,
-            thickness: 3,
-          ),
-          Expanded(
-            flex: 2,
-            child: Row(
-              children: [
-                Expanded(
-                    child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text("Sura Name",
-                            style: Theme.of(context).textTheme.bodyMedium),
-                        VerticalDivider(
-                          thickness: 3,
-                          color: AppColors.primaryLightColor,
-                        ),
-                        Text("Num of verses",
-                            style: Theme.of(context).textTheme.bodyMedium),
-                      ],
-                    ),
-                    Divider(
-                      color: AppColors.primaryLightColor,
-                      thickness: 3,
-                    ),
-                    Expanded(
-                        child: ListView.separated(
-                      separatorBuilder: (context, index) {
-                        return Divider(
-                          color: AppColors.primaryLightColor,
-                          thickness: 1,
-                        );
-                      },
-                      itemBuilder: (context, index) {
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            ItemSuraName(name: surasName[index], index: index),
-                            VerticalDivider(
+    return Stack(
+      children: [
+        Column(
+          children: [
+            Expanded(
+                flex: 1, child: Image.asset('assets/images/quran_logo.png')),
+            Divider(
+              color: AppColors.primaryLightColor,
+              thickness: 3,
+            ),
+            Expanded(
+              flex: 2,
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(AppLocalizations.of(context)!.sura_name,
+                              style: Theme.of(context).textTheme.bodyMedium),
+                          SizedBox(
+                            height: 35,
+                            child: VerticalDivider(
                               thickness: 3,
                               color: AppColors.primaryLightColor,
                             ),
-                            Text(surasNumbers[index],
-                                style: Theme.of(context).textTheme.bodySmall)
-                          ],
-                        );
-                      },
-                      itemCount: surasName.length,
-                    )),
-                  ],
-                )),
-              ],
-            ),
-          )
-        ],
-      ),
+                          ),
+                          Text(AppLocalizations.of(context)!.num_of_verses,
+                              style: Theme.of(context).textTheme.bodyMedium),
+                        ],
+                      ),
+                      Divider(
+                        color: AppColors.primaryLightColor,
+                        thickness: 3,
+                      ),
+                      Expanded(
+                          child: ListView.separated(
+                        separatorBuilder: (context, index) {
+                          return SizedBox(
+                            height: 15,
+                            child: VerticalDivider(
+                              thickness: 3,
+                              color: AppColors.primaryLightColor,
+                            ),
+                          );
+                        },
+                        itemBuilder: (context, index) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              ItemSuraName(
+                                  name: surasName[index], index: index),
+                              Text(surasNumbers[index],
+                                  style: Theme.of(context).textTheme.bodySmall)
+                            ],
+                          );
+                        },
+                        itemCount: surasName.length,
+                      )),
+                    ],
+                  )),
+                ],
+              ),
+            )
+          ],
+        ),
+      ],
     );
   }
 }
