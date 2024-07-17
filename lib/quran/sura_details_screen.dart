@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_app/app_colors.dart';
 import 'package:islami_app/quran/item_sura_details.dart';
 import 'package:islami_app/quran/sura_details_args.dart';
@@ -30,7 +31,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
       Scaffold(
         appBar: AppBar(
           title: Text(
-            'Islami',
+            AppLocalizations.of(context)!.app_title,
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
@@ -53,18 +54,18 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                   top: MediaQuery.of(context).size.height * 0.08,
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(args.name),
+                    Icon(
+                      Icons.play_circle,
+                      size: 30,
+                    ),
                     Container(
                       padding: EdgeInsets.only(
                         right: MediaQuery.of(context).size.width * 0.1,
                       ),
                     ),
-                    Icon(
-                      Icons.play_circle,
-                      size: 30,
-                    ),
+                    Text(args.name),
                   ],
                 ),
               ),
