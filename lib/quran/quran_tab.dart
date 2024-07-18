@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_app/app_colors.dart';
 import 'package:islami_app/quran/item_sura_name.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/app_config_provider.dart';
 
 class QuranTab extends StatelessWidget {
   List<String> surasName = [
@@ -238,6 +241,8 @@ class QuranTab extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
+
     return Stack(
       children: [
         Column(
@@ -245,7 +250,9 @@ class QuranTab extends StatelessWidget {
             Expanded(
                 flex: 1, child: Image.asset('assets/images/quran_logo.png')),
             Divider(
-              color: AppColors.primaryLightColor,
+              color: provider.isDarkMode()
+                  ? AppColors.yellowColor
+                  : AppColors.primaryLightColor,
               thickness: 3,
             ),
             Expanded(
@@ -264,7 +271,9 @@ class QuranTab extends StatelessWidget {
                             height: 35,
                             child: VerticalDivider(
                               thickness: 3,
-                              color: AppColors.primaryLightColor,
+                              color: provider.isDarkMode()
+                                  ? AppColors.yellowColor
+                                  : AppColors.primaryLightColor,
                             ),
                           ),
                           Text(AppLocalizations.of(context)!.num_of_verses,
@@ -272,7 +281,9 @@ class QuranTab extends StatelessWidget {
                         ],
                       ),
                       Divider(
-                        color: AppColors.primaryLightColor,
+                        color: provider.isDarkMode()
+                            ? AppColors.yellowColor
+                            : AppColors.primaryLightColor,
                         thickness: 3,
                       ),
                       Expanded(
@@ -282,7 +293,9 @@ class QuranTab extends StatelessWidget {
                             height: 15,
                             child: VerticalDivider(
                               thickness: 3,
-                              color: AppColors.primaryLightColor,
+                              color: provider.isDarkMode()
+                                  ? AppColors.yellowColor
+                                  : AppColors.primaryLightColor,
                             ),
                           );
                         },
