@@ -4,6 +4,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_app/app_colors.dart';
 import 'package:islami_app/quran/item_sura_details.dart';
 import 'package:islami_app/quran/sura_details_args.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/app_config_provider.dart';
 
 class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = 'sura_details';
@@ -21,8 +24,17 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
     if (verses.isEmpty) {
       loadFile(args.index);
     }
+    var provider = Provider.of<AppConfigProvider>(context);
+
     return Stack(children: [
-      Image.asset(
+      provider.isDarkMode()
+          ? Image.asset(
+              'assets/images/main_dark_background.png',
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.fill,
+            )
+          : Image.asset(
         'assets/images/main_background.png',
         width: double.infinity,
         height: double.infinity,
@@ -43,47 +55,58 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
             top: MediaQuery.of(context).size.height * 0.08,
           ),
           decoration: BoxDecoration(
-            color: AppColors.whiteColor,
+            color: provider.isDarkMode()
+                ? AppColors.primaryDarkColor
+                : AppColors.whiteColor,
             borderRadius: BorderRadius.circular(24),
           ),
           child: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  right: MediaQuery.of(context).size.width * 0.17,
-                  top: MediaQuery.of(context).size.height * 0.08,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.play_circle,
-                      size: 30,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.play_circle,
+                    size: 30,
+                    color: provider.isDarkMode()
+                        ? AppColors.yellowColor
+                        : AppColors.blackColor,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width * 0.1,
                     ),
-                    Container(
-                      padding: EdgeInsets.only(
-                        right: MediaQuery.of(context).size.width * 0.1,
-                      ),
-                    ),
-                    Text(args.name),
-                  ],
-                ),
+                  ),
+                  Text(
+                    args.name,
+                    style: TextStyle(
+                        color: provider.isDarkMode()
+                            ? AppColors.yellowColor
+                            : AppColors.primaryLightColor),
+                  ),
+                ],
               ),
               Divider(
-                color: AppColors.primaryLightColor,
+                color: provider.isDarkMode()
+                    ? AppColors.yellowColor
+                    : AppColors.whiteColor,
                 thickness: 3,
                 indent: 40,
                 endIndent: 40,
               ),
               verses.isEmpty
                   ? CircularProgressIndicator(
-                      color: AppColors.primaryLightColor,
+                      color: provider.isDarkMode()
+                          ? AppColors.yellowColor
+                          : AppColors.whiteColor,
                     )
                   : Expanded(
                       child: ListView.separated(
                         separatorBuilder: (context, index) {
                           return Divider(
-                            color: AppColors.primaryLightColor,
+                            color: provider.isDarkMode()
+                                ? AppColors.yellowColor
+                                : AppColors.whiteColor,
                             thickness: 1,
                           );
                         },

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
+import '../app_colors.dart';
+import '../providers/app_config_provider.dart';
 
 class RadioTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
+
     return ListView(
       children: [
         Center(
@@ -28,8 +34,11 @@ class RadioTab extends StatelessWidget {
                         IconButton(
                           onPressed: () {},
                           icon: Icon(
-                            Icons.skip_previous,
+                            Icons.skip_next,
                             size: MediaQuery.of(context).size.height * 0.05,
+                            color: provider.isDarkMode()
+                                ? AppColors.yellowColor
+                                : AppColors.blackColor,
                           ),
                         ),
                         IconButton(
@@ -37,13 +46,19 @@ class RadioTab extends StatelessWidget {
                           icon: Icon(
                             Icons.play_arrow,
                             size: MediaQuery.of(context).size.height * 0.08,
+                            color: provider.isDarkMode()
+                                ? AppColors.yellowColor
+                                : AppColors.blackColor,
                           ),
                         ),
                         IconButton(
                           onPressed: () {},
                           icon: Icon(
-                            Icons.skip_next,
+                            Icons.skip_previous,
                             size: MediaQuery.of(context).size.height * 0.05,
+                            color: provider.isDarkMode()
+                                ? AppColors.yellowColor
+                                : AppColors.blackColor,
                           ),
                         ),
                       ],

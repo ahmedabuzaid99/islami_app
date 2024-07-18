@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_app/app_colors.dart';
 import 'package:islami_app/hadeth/item_hadeth_name.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/app_config_provider.dart';
 
 class HadethTab extends StatefulWidget {
   @override
@@ -17,17 +20,23 @@ class _HadethTabState extends State<HadethTab> {
     if (ahadethList.isEmpty) {
       loadHadethFile();
     }
+    var provider = Provider.of<AppConfigProvider>(context);
+
     return Column(
       children: [
         Expanded(flex: 1, child: Image.asset('assets/images/hadeth_logo.png')),
         Divider(
-          color: AppColors.primaryLightColor,
+          color: provider.isDarkMode()
+              ? AppColors.yellowColor
+              : AppColors.primaryLightColor,
           thickness: 3,
         ),
         Text(AppLocalizations.of(context)!.hadeth_name,
             style: Theme.of(context).textTheme.bodyMedium),
         Divider(
-          color: AppColors.primaryLightColor,
+          color: provider.isDarkMode()
+              ? AppColors.yellowColor
+              : AppColors.primaryLightColor,
           thickness: 3,
         ),
         Expanded(
@@ -35,13 +44,17 @@ class _HadethTabState extends State<HadethTab> {
             child: ahadethList.isEmpty
                 ? Center(
                     child: CircularProgressIndicator(
-                      color: AppColors.primaryLightColor,
+                      color: provider.isDarkMode()
+                          ? AppColors.yellowColor
+                          : AppColors.primaryLightColor,
                     ),
                   )
                 : ListView.separated(
                     separatorBuilder: (context, index) {
                       return Divider(
-                        color: AppColors.primaryLightColor,
+                        color: provider.isDarkMode()
+                            ? AppColors.yellowColor
+                            : AppColors.primaryLightColor,
                         thickness: 1,
                       );
                     },
