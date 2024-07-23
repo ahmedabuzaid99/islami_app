@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/user_preferences.dart';
 
 class AppConfigProvider extends ChangeNotifier {
 //// data
@@ -10,6 +11,7 @@ class AppConfigProvider extends ChangeNotifier {
       return;
     }
     appTheme = newMode;
+    UserPreferences.saveThemePreference(appTheme);
     notifyListeners();
   }
 
@@ -18,6 +20,7 @@ class AppConfigProvider extends ChangeNotifier {
       return;
     }
     appLanguage = newLanguage;
+    UserPreferences.setLanguage(appLanguage);
     notifyListeners();
   }
 
